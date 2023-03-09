@@ -1,0 +1,28 @@
+columns:
+  name:
+    label: "spanjaan.contactform::lang.contactform.from"
+    type: partial
+    path: ~/plugins/spanjaan/contactform/models/contactform/_name_col.htm
+    searchable: true
+    sortable: true
+  subject:
+    label: "spanjaan.contactform::lang.contactform.subject"
+    type: text
+    searchable: true
+    sortable: true
+  email:
+    label: "spanjaan.contactform::lang.contactform.email"
+    type: text
+    searchable: true
+    sortable: true
+  phone:
+    label: "spanjaan.contactform::lang.contactform.phone"
+    type: text
+    searchable: true
+    invisible: true
+    sortable: true
+  created_at:
+    label: "spanjaan.contactform::lang.contactform.date"
+    type: date
+    searchable: true
+    sortable: true

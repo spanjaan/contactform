@@ -1,0 +1,67 @@
+<form id="contactform" data-request="{{ __SELF__ }}::onFormSubmit" class="g-4">
+  
+    <div id="simple_contact_flash_message"></div>
+
+    <div class="form-group">
+        <label for="name" class="form-label">{{__SELF__.properties.nameLabel}}</label>
+        <input class="form-control" type="text" name="name" id="name" placeholder="Full name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="form-label">{{__SELF__.properties.emailLabel}}</label>
+        <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
+    </div>
+
+    {% if(__SELF__.properties.phoneEnabled) %}
+        <div class="form-group">
+            <label for="phone" class="form-label">{{__SELF__.properties.phoneLabel}}</label>
+            <input class="form-control" type="phone" name="phone" id="phone" placeholder="Phone" required>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="subject" class="form-label">{{__SELF__.properties.subjectLabel}}</label>
+        <input class="form-control" type="text" id="subject" name="subject" placeholder="Subject" required>
+    </div>
+
+    <div class="form-group">
+        <label for="message" class="form-label">{{__SELF__.properties.messageLabel}}</label>
+        <textarea id="message" name="message" type="text" class="form-control" placeholder="Message" required></textarea>
+    </div>
+
+    <!-- Injecting reCaptcha if enabled -->
+    {% if(__SELF__.settings.recaptcha_enabled) %}
+        <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+    {% endif %}
+    <!-- End reCaptcha -->
+
+    <div class="col-12 pt-2 text-center pt-sm-3 ">
+        <button id="SubmitButton" name="action" value="validate_captcha" type="submit" class="btn btn-lg btn-primary w-100 w-sm-auto" data-attach-loading>{{__SELF__.properties.buttonText}}</button>
+    </div>
+
+</form>
+{% if(__SELF__.settings.recaptcha_enabled) %}
+<script src="https://www.google.com/recaptcha/api.js?render={{__SELF__.settings.recaptcha_site_key}}"></script>
+ <script>
+     setTimeout(function () {
+ grecaptcha.ready(function () {
+  grecaptcha.execute('{{__SELF__.settings.recaptcha_site_key}}', { action: 'validate_captcha' })
+   .then(function (token) {
+    document.getElementById('g-recaptcha-response').value = token;
+   });
+ });
+}, 9000);
+
+document.getElementById('contactform').addEventListener('ajaxDone', function (event) {
+ // Reset the reCAPTCHA response
+ const recaptchaResponse = document.getElementById('g-recaptcha-response');
+ recaptchaResponse.value = '';
+
+ // Execute reCAPTCHA again to get a new response token
+ grecaptcha.execute('{{__SELF__.settings.recaptcha_site_key}}', { action: 'validate_captcha' })
+  .then(function (token) {
+   recaptchaResponse.value = token;
+  });
+});
+  </script>
+{% endif %}

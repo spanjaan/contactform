@@ -1,0 +1,11 @@
+table.table.data tbody tr.new td {
+    font-weight: bold !important;
+    background-color: #ff8fab !important;
+}
+
+table.table.data tbody td {
+    background-color: #ffc2d1!important;
+}
+.list-row.replied {
+    background-color: #e9da55 !important;
+}

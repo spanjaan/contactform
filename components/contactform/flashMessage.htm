@@ -1,0 +1,29 @@
+{% flash success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <span class="fw-bold">{{ message }}</span>
+    <button
+        class="btn-close"
+        type="button"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+    ></button>
+</div>
+{% endflash %} {% flash error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <span class="fw-bold">
+        {% if(__SELF__.properties.detailedErrors == 1) %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% else %} {{ message }} {% endif %}</span
+    >
+    <button
+        class="btn-close"
+        type="button"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+    ></button>
+</div>
+{% endflash %}

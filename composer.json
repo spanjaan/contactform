@@ -1,0 +1,26 @@
+{
+    "name": "spanjaan/contactform",
+    "description": "Contactform plugin for Winter CMS",
+    "type": "winter-plugin",
+    "require": {
+        "php": "^8.0",
+        "wintercms/winter": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "spanjaan\\contactform\\": "plugins/"
+        }
+    },
+    "license": "MIT",
+    "keywords": [
+        "wintercms",
+        "contactform",
+        "plugin"
+    ],
+    "support": {
+        "email": "spanjaan@gmail.com",
+        "issues": "https://github.com/spanjaan/contactform/issues",
+        "source": "https://github.com/spanjaan/contactform"
+    },
+    "homepage": "https://github.com/spanjaan/contactform"
+}

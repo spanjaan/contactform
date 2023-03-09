@@ -1,0 +1,41 @@
+/* Backend message CSS
+   Author: S.p. Anjaan
+*/
+.message-body{
+ background-color: #edede9 !important;
+ border-radius: 5px;
+}
+.message-body .message-top {
+ 
+    padding: 10px;
+    color: #47032d !important;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+.message-body .message-top p a {
+    color: #47032d !important;
+    text-decoration: none;
+}
+.message-body .message-top p a:hover {
+    color: #4044ee !important;
+    text-decoration: none;
+}
+.message-body .subject {
+    color: #4044ee;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 20px;
+    padding: 10px;
+}
+.message-body .message {
+    padding: 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+   
+}
+.message-body .message-info{
+ font-weight: bold;
+}
+
+

@@ -1,0 +1,43 @@
+fields:
+  form_mail_settings.section:
+    label: spanjaan.contactform::lang.settings.section_mail_label
+    type: section
+
+  recieve_notification:
+    span: left
+    label: spanjaan.contactform::lang.settings.notification_label
+    commentAbove: spanjaan.contactform::lang.settings.notification_comment
+    type: switch
+
+  auto_reply:
+    span: right
+    label: spanjaan.contactform::lang.settings.auto_reply_label
+    commentAbove: spanjaan.contactform::lang.settings.auto_reply_comment
+    type: switch
+
+  notification_email_address:
+    label: spanjaan.contactform::lang.settings.notification_email_address
+    commentAbove: spanjaan.contactform::lang.settings.notification_email_address_comment
+    span: left
+    type: text
+
+  recaptcha_settings.section:
+    label: spanjaan.contactform::lang.settings.section_recaptcha_label
+    type: section
+    comment: spanjaan.contactform::lang.settings.section_recaptcha_comments
+
+  recaptcha_enabled:
+    label: spanjaan.contactform::lang.settings.recaptcha_label
+    commentAbove: spanjaan.contactform::lang.settings.recaptcha_comment
+    type: switch
+
+  site_key:
+    label: spanjaan.contactform::lang.settings.site_key_label
+    commentAbove: spanjaan.contactform::lang.settings.site_key_comment
+    span: left
+    type: text
+  secret_key:
+    label: spanjaan.contactform::lang.settings.secret_key_label
+    commentAbove: spanjaan.contactform::lang.settings.secret_key_comment
+    span: right
+    type: text

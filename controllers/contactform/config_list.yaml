@@ -1,0 +1,13 @@
+title: ContactForm
+modelClass: Spanjaan\ContactForm\Models\ContactForm
+list: $/spanjaan/contactform/models/contactform/columns.yaml
+recordUrl: spanjaan/contactform/contactform/view/:id
+noRecordsMessage: "backend::lang.list.no_records"
+showSetup: true
+showCheckboxes: true
+defaultSort: "created_at: desc"
+recordsPerPage: 20
+toolbar:
+  buttons: list_toolbar
+  search:
+    prompt: "backend::lang.list.search_prompt"

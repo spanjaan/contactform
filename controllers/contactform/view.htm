@@ -1,0 +1,161 @@
+<!--ToolBar-->
+<div class="control-toolbar">
+    <div class="toolbar-item toolbar-primary">
+        <div data-control="toolbar">
+            <a href="<?= Backend::url('spanjaan/contactform/contactform') ?>" type="button"
+                class="btn btn-default btn-sm wn-icon-arrow-left"><?= e(trans('spanjaan.contactform::lang.contactform.back')) ?></a>
+            <button type="button" class="btn btn-danger btn-sm wn-icon-trash" data-request="onDeleteSingle"
+                data-request-confirm="<?= e(trans('backend::lang.form.confirm_delete')) ?>"
+                data-request-data="id: <?= $message->id ?>" data-stripe-load-indicator>
+                <?= e(trans('backend::lang.account.delete')) ?>
+            </button>
+            <!--Reply Button-->
+            <button class="btn btn-sm btn-success wn-icon-reply" data-toggle="modal" href="#message_reply"
+                data-size="giant">
+                <?= e(trans('spanjaan.contactform::lang.contactform.reply')) ?>
+            </button>
+            <!--Print Button-->
+            <button class="btn btn-sm btn-warning wn-icon-print" data-toggle="modal" href="#message_printing"
+                data-size="giant">
+                <?= e(trans('spanjaan.contactform::lang.contactform.print')) ?>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--Name,Email,Phone-->
+<div class="message-body">
+    <div class="message-top">
+        <p>
+            <i class="wn-icon-user-circle-o"> <?= $message->name ?></i>
+        </p>
+        <p>
+            <a href="mailto:<?= $message->email ?>"><i class="wn-icon-envelope"> <?= $message->email ?></i></a>
+        </p>
+        <p>
+            <i class="wn-icon-phone"> <?= $message->phone ?></i>
+        </p>
+        <p>
+            <i class="wn-icon-clock-o"><?= date('M d, Y \a\t g:i A', strtotime(
+    $message->created_at
+)); ?></i>
+        </p>
+    </div>
+    <!-- Subject -->
+    <div class="subject">Subject:<?= $message->subject ?></div>
+    <!-- Message Body -->
+    <div class="message"><?= nl2br($message->message) ?></div>
+</div>
+
+<!-- Message Print -->
+<div class="control-popup modal fade" id="message_printing" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <?= e(trans('spanjaan.contactform::lang.contactform.print_message')) ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div id="print-form">
+                    <span class="name">
+                        <p>
+                            Name:
+                            <?= $message->name ?>
+                        </p>
+                        <p>
+                            Email:
+                            <?= $message->email ?>
+                        </p>
+                        <p>
+                            <?= e(trans('spanjaan.contactform::lang.contactform.phone')) ?>:
+                            <?= $message->phone ?>
+                        </p>
+                        <p>
+                            Send Date:
+                            <?= date('M d, Y \a\t g:i A', strtotime(
+                    $message->created_at
+                )); ?>
+                        </p>
+                    </span>
+
+                    <hr />
+                    <strong><?= e(trans('spanjaan.contactform::lang.contactform.subject')) ?>:
+                        <?= $message->subject ?>
+                    </strong>
+                    <hr />
+                    <h3>Message:</h3>
+                    <p><?= nl2br($message->message) ?></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <?= e(trans('spanjaan.contactform::lang.contactform.button_close_reply')) ?>
+                </button>
+                <button onclick="printJS('print-form', 'html')" type="button" class="btn btn-primary"
+                    data-dismiss="modal">
+                    <?= e(trans('spanjaan.contactform::lang.contactform.print')) ?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message Reply -->
+<div class="control-popup modal fade" id="message_reply" tabindex="-2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <?= e(trans('spanjaan.contactform::lang.contactform.message_reply')) ?>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <?= Form::ajax('onReplyMessage', [
+                                    'id' =>
+                'replyMessageForm', 'class' => 'form-elements', 'role' =>
+                'form', 'success' => " $.wn.flashMsg({ 'text': '<?= e(trans('spanjaan.contactform::lang.contactform.message_reply_success')) ?>',
+                'class': 'success', 'interval': 3 });" ]) ?>
+
+                <input type="hidden" name="id" value="<?= $message->id ?>" />
+                <input type="hidden" name="name_to" value="<?= $message->name ?>" />
+                <input type="hidden" name="email_to" value="<?= $message->email ?>" />
+
+                <div class="form-group text-field span-full is-required">
+                    <label><?= e(trans('spanjaan.contactform::lang.contactform.subject')) ?></label>
+                    <input type="text" name="subject" value="Re: <?= $message->subject ?>" class="form-control"
+                        required />
+                </div>
+
+                <div class="form-group textarea-field span-full is-required">
+                    <label><?= e(trans('spanjaan.contactform::lang.contactform.message')) ?></label>
+                    <textarea type="text" name="message" id="message"
+                        class="form-control field-textarea size-huge"></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" data-request="onReplyMessage" data-request-success="
+                                        $.wn.flashMsg({
+                                        'text': '<?= e(trans('spanjaan.contactform::lang.contactform.message_reply_success')) ?>',
+                                        'class': 'success',
+                                        'interval': 3
+                                    });
+                                 " data-stripe-load-indicator class="btn btn-primary wn-icon-reply">
+                        <?= e(trans('spanjaan.contactform::lang.contactform.button_submit_reply')) ?>
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <?= e(trans('spanjaan.contactform::lang.contactform.button_close_reply')) ?>
+                    </button>
+                </div>
+
+                <?= Form::close() ?>
+            </div>
+        </div>
+    </div>
+</div>

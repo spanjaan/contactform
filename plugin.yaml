@@ -1,0 +1,13 @@
+plugin:
+  name: "spanjaan.contactform::lang.plugin.name"
+  description: "spanjaan.contactform::lang.plugin.description"
+  author: S.p. Anjaan
+  icon: oc-icon-envelope
+  homepage: ""
+permissions:
+  spanjaan.contactform.inbox:
+    tab: "spanjaan.contactform::lang.contactform.permission"
+    label: "spanjaan.contactform::lang.contactform.permission_messages"
+  spanjaan.contactform.manage_settings:
+    tab: "spanjaan.contactform::lang.contactform.permission"
+    label: "spanjaan.contactform::lang.contactform.permission_settings"
