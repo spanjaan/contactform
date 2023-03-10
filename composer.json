@@ -4,7 +4,7 @@
     "type": "winter-plugin",
     "require": {
         "php": "^8.0",
-        "wintercms/winter": "^1.0"
+        "wintercms/winter": "^1.2"
     },
     "autoload": {
         "psr-4": {
